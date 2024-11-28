@@ -1,7 +1,7 @@
-import React from 'react';
-import Editor from './python_editor.jsx';
-import Translator from './nl_translator.jsx';
-import Console from './output.jsx';
+import React, { useState } from 'react';
+import Python_editor from './python_editor.jsx';
+import NL_translator from './nl_translator.jsx';
+import Output from './output.jsx';
 
 function App() {
 
@@ -11,12 +11,12 @@ function App() {
         <div className="app-container">
             {/* Top row: Code editor and Translator */}
             <div className="top-row">
-                <Editor />
-                <Translator />
+                <Python_editor />
+                <NL_translator />
             </div>
             {/* Bottom row: Python console */}
             <div className="bottom-row">
-                <Console />
+                <Output />
             </div>
         </div>
     );

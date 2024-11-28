@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react';
 
-function NLTranslator( {code} ) {
+function nl_translator( {code} ) {
 
     const [input, set_input] = useState('');
     const [translator_output, set_translator_output] = useState('')
@@ -20,4 +20,4 @@ function NLTranslator( {code} ) {
     );
 }
 
-export default NLTranslator;
+export default nl_translator;

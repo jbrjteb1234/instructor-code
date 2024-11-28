@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function python_editor( {code, set_Code} ) {
+function Python_editor( {code, set_Code} ) {
 
     const [output, set_output] = useState('');
 
@@ -16,4 +16,4 @@ function python_editor( {code, set_Code} ) {
 
 }
 
-export default Editor;
+export default Python_editor;

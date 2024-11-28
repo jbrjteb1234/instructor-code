@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-function CodeOutput( {code} ) {
+function code_output( {code} ) {
     const [output, set_output] = useState('');
 
     return (
@@ -10,4 +10,4 @@ function CodeOutput( {code} ) {
     );
 }
 
-export default CodeOutput;
+export default code_output;
