@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 
-function nl_translator( {code} ) {
+function NLTranslator( {code} ) {
 
-    const [input, set_input] = useState('');
-    const [translator_output, set_translator_output] = useState('')
+    const [input, setInput] = useState('');
+    const [translatorOutput, setTranslatorOutput] = useState('')
 
-    function handle_set_translated_code() {
+    function handleSetTranslatedCode() {
         
     }
 
-    function handle_set_input(){
+    function handleSetCodeInput(){
 
     }
 
@@ -20,4 +20,4 @@ function nl_translator( {code} ) {
     );
 }
 
-export default nl_translator;
+export default NLTranslator;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-function code_output( {code} ) {
-    const [output, set_output] = useState('');
+function CodeOutput( {code} ) {
+    const [output, setOutput] = useState('');
 
     return (
         <div className="code-output">
@@ -10,4 +10,4 @@ function code_output( {code} ) {
     );
 }
 
-export default code_output;
+export default CodeOutput;
