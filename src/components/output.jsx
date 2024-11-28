@@ -1,6 +1,6 @@
 import React from 'react';
 
-function CodeOutput() {
+function CodeOutput( {code} ) {
     const [output, set_output] = useState('');
 
     return (

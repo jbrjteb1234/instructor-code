@@ -1,8 +1,9 @@
 import React from 'react'
 
-function NLTranslator() {
+function NLTranslator( {code} ) {
+
     const [input, set_input] = useState('');
-    const [translated_code, set_translated_code] = useState('');
+    const [translator_output, set_translator_output] = useState('')
 
     function handle_set_translated_code() {
         
