@@ -11,12 +11,12 @@ function App() {
         <div className="app-container">
             {/* Top row: Code editor and Translator */}
             <div className="top-row">
-                <PythonEditor />
-                <NLTranslator />
+                <PythonEditor code={code} setCode={setCode} />
+                <NLTranslator code={code} />
             </div>
             {/* Bottom row: Python console */}
             <div className="bottom-row">
-                <Output />
+                <Output code={code} />
             </div>
         </div>
     );
