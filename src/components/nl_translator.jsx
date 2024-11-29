@@ -5,21 +5,28 @@ function NLTranslator( {code} ) {
     const [input, setInput] = useState('');
     const [translatorOutput, setTranslatorOutput] = useState('')
 
-    function handleSetTranslatedCode() {
+    function handleTranslateCode() {
         
     }
 
-    function handleSetCodeInput(e){
+    function handleSetNLInput(e){
         setInput(e.target.value);
     }
 
     return (
         <div className="nl-translator">
-            <h2>Natural Language Translator</h2>
+
+            <h2>Instructor Code Assistance</h2>
+
             <textarea
                 value={input}
-                onChange={handleSetCodeInput}
+                onChange={handleSetNLInput}
             />
+
+            <button onClick={handleTranslateCode}>
+                Enter
+            </button>
+
         </div>
     );
 }
