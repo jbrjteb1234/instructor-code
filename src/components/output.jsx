@@ -1,10 +1,42 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function CodeOutput( {code} ) {
     const [output, setOutput] = useState('');
+    const [pyodide, setPyodide] = useState(null);
 
-    function handleExecuteCode() {
-        console.log("Executing code");
+    useEffect(function () {
+        async function loadPyodideInstance() {
+            try {
+                const pyodideInstance = await window.loadPyodide();
+                setPyodide(pyodideInstance);
+                console.log("Pyodide loaded.")
+            } catch (error) {
+                console.error('Error loading Pyodide: ', error);
+            }
+        }
+
+        loadPyodideInstance();
+    }, []); 
+
+    async function handleExecuteCode() {
+        try {
+
+            //Redirect stdout to a string variable
+            await pyodide.runPythonAsync(`
+                import sys
+                from io import StringIO
+                sys.stdout = StringIO()
+            `);
+            
+            //Execute the user's code
+            await pyodide.runPythonAsync(code);
+
+            const result = await pyodide.runPythonAsync('sys.stdout.getvalue()');
+            setOutput(result);
+
+        } catch (error) {
+            setOutput(`Error: ${error.message}`);
+        }
     }
 
     return (
