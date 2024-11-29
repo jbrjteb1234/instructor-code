@@ -19,6 +19,12 @@ function CodeOutput( {code} ) {
     }, []); 
 
     async function handleExecuteCode() {
+
+        if (!pyodide) {
+            setOutput('Python executor loading. Please wait.');
+            return;
+        }
+
         try {
 
             //Redirect stdout to a string variable
