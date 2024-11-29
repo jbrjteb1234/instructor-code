@@ -2,14 +2,8 @@ import React, { useState } from 'react'
 
 function PythonEditor( {code, setCode} ) {
 
-    const [output, setOutput] = useState('');
-
     function handleCodeChange(e) {
         setCode(e.target.value);
-    }
-
-    function handleExecuteCode() {
-        console.log("Executing code");
     }
 
     return (
@@ -21,11 +15,6 @@ function PythonEditor( {code, setCode} ) {
                 value={code}
                 onChange={handleCodeChange}
             />
-
-            <button onClick={handleExecuteCode}>
-                Execute Code
-            </button>
-
 
         </div>
     );
