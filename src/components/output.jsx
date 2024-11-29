@@ -4,6 +4,10 @@ function CodeOutput( {code} ) {
     const [output, setOutput] = useState('');
     const [pyodide, setPyodide] = useState(null);
 
+    function handleQueryError(){
+        
+    }
+
     useEffect(function () {
         async function loadPyodideInstance() {
             try {
@@ -58,6 +62,10 @@ function CodeOutput( {code} ) {
 
             <button onClick={handleExecuteCode}>
                 Execute Code
+            </button>
+
+            <button onClick={handleQueryError}>
+                Query error
             </button>
 
         </div>
