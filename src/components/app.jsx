@@ -1,23 +1,44 @@
 import React, { useState } from 'react';
 import PythonEditor from './python_editor.jsx';
 import NLTranslator from './nl_translator.jsx';
-import Output from './output.jsx';
+import CodeOutput from './output.jsx';
 
 function App() {
 
-    const [code, setCode] = useState('');      // Holds the current Python code
+    const [code, setCode] = useState('');
+
+    const containerStyle = {
+        height: '100vh', 
+        display: 'flex',
+    };
+
+    const leftStyle = {
+        display: 'flex', 
+        flex: 1, 
+        flexDirection: 'column',
+    };
 
     return (
-        <div className="app-container">
-            {/* Top row: Code editor and Translator */}
-            <div className="top-row">
+        <div style={containerStyle}>
+
+            <div style={leftStyle}>
+
+                <div style={{flex: 1}}>
+                    <NLTranslator code={code} />
+                </div>
+
+                <div style={{flex: 1}}>
+                    <CodeOutput code={code} />
+                </div>
+
+            </div>
+
+            <div style={{flex: 1}}>
+
                 <PythonEditor code={code} setCode={setCode} />
-                <NLTranslator code={code} />
+
             </div>
-            {/* Bottom row: Python console */}
-            <div className="bottom-row">
-                <Output code={code} />
-            </div>
+            
         </div>
     );
 }

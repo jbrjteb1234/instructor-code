@@ -5,20 +5,22 @@ import 'ace-builds/src-noconflict/mode-python';
 
 function PythonEditor( {code, setCode} ) {
 
+    const editorStyle = {
+        height: '100%',
+        width: '100%', 
+    };
+
     function handleCodeChange(newValue) {
         setCode(newValue);
     }
 
     return (
-        <div className="editor">
-
-            <h2>Python Editor</h2>
-
+        <div className="editor" style={editorStyle} >
             <AceEditor
                 mode="python"
                 name="python_editor"
-                width="50%"
-                height="400px"
+                width="100%"
+                height="100%"
                 value={code}
                 onChange={handleCodeChange}
                 editorProps={{ $blockScrolling: true }}
