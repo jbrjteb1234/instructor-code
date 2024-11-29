@@ -6,6 +6,11 @@ function CodeOutput( {code} ) {
     return (
         <div className="code-output">
             <h2>Python Console Output</h2>
+            <textarea
+                value={output} 
+                readOnly 
+                rows="10" 
+            />
         </div>
     );
 }
