@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 function NLTranslator( {code} ) {
 
     const [input, setInput] = useState('');
     const [translatorOutput, setTranslatorOutput] = useState('')
 
-    function handleTranslateCode() {
-        
+    async function handleTranslateCode() {
+        try{
+            const response = await axios.post('http://localhost:5000/translate');
+            setTranslatorOutput(response);
+        }catch(e){
+            setTranslatorOutput('Error');
+        }
     }
 
     function handleSetNLInput(e){
