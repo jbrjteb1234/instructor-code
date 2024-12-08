@@ -15,21 +15,36 @@ function NLTranslator( {code} ) {
         }
     }
 
+    const translatorStyle = {
+        height: '100%',
+        width: '100%',
+        display: 'flex', 
+        flex: 1, 
+        flexDirection: 'column',
+    };
+
     function handleSetNLInput(e){
         setInput(e.target.value);
     }
 
     return (
-        <div className="nl-translator">
+        <div className="nl-translator" style = {translatorStyle}>
 
             <h2>Instructor Code Assistance</h2>
 
             <textarea
+                style = {{flex: 7}}
+                readOnly
+                value={translatorOutput}
+            />
+
+            <textarea
+                style = {{flex: 2}}
                 value={input}
                 onChange={handleSetNLInput}
             />
 
-            <button onClick={handleTranslateCode}>
+            <button onClick={handleTranslateCode} style = {{flex: 1}}>
                 Enter
             </button>
 

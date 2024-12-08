@@ -12,8 +12,10 @@ function App() {
         display: 'flex',
     };
 
-    const leftStyle = {
-        display: 'flex', 
+    const columnContainerStyle = {
+        height: '100%',
+        width: '100%',
+        display: 'flex',
         flex: 1, 
         flexDirection: 'column',
     };
@@ -21,7 +23,7 @@ function App() {
     return (
         <div style={containerStyle}>
 
-            <div style={leftStyle}>
+            <div style={columnContainerStyle}>
 
                 <div style={{flex: 1}}>
                     <NLTranslator code={code} />
