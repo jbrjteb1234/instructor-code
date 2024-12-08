@@ -20,7 +20,8 @@ function NLTranslator( {code} ) {
 
     async function retrieveOutput(type){
         try{
-            const response = await axios.post('http://localhost:5000/'+type);
+            const data = {code: code};
+            const response = await axios.post('http://localhost:5000/'+type, code);
             setTranslatorOutput(response);
         }catch(e){
             setTranslatorOutput('Error');
