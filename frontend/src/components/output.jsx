@@ -12,10 +12,6 @@ function CodeOutput( {code} ) {
         flexDirection: 'column',
     };
 
-    function handleQueryError(){
-        
-    }
-
     useEffect(function () {
         async function loadPyodideInstance() {
             try {
@@ -61,20 +57,14 @@ function CodeOutput( {code} ) {
         <div className="code-output" style={translatorStyle}>
 
             <textarea
-                style={{flex: 8}}
+                style={{flex: 9}}
                 value={output} 
                 readOnly 
             />
 
-            <div style={{flex: 2, display: 'flex'}}>
-                <button onClick={handleExecuteCode} style={{flex: 3}}>
-                    Execute Code
-                </button>
-
-                <button onClick={handleQueryError} style={{flex: 1}}>
-                    Query Error
-                </button>
-            </div>
+            <button onClick={handleExecuteCode} style={{flex: 1}}>
+                Execute Code
+            </button>
 
         </div>
     );

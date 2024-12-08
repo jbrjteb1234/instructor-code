@@ -6,8 +6,15 @@ import torch
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/translate', methods=['POST'])
-def translate(): 
+@app.route('/prompt-assistance', methods=['POST'])
+def prompt(): 
+
+        response = "Server reached"
+
+        return {"response": response}
+
+@app.route('/query-error', methods=['POST'])
+def prompt(): 
 
         response = "Server reached"
 

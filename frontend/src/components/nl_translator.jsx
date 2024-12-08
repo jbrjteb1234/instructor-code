@@ -6,15 +6,6 @@ function NLTranslator( {code} ) {
     const [input, setInput] = useState('');
     const [translatorOutput, setTranslatorOutput] = useState('')
 
-    async function handleTranslateCode() {
-        try{
-            const response = await axios.post('http://localhost:5000/translate');
-            setTranslatorOutput(response);
-        }catch(e){
-            setTranslatorOutput('Error');
-        }
-    }
-
     const translatorStyle = {
         height: '100%',
         width: '100%',
@@ -25,6 +16,24 @@ function NLTranslator( {code} ) {
 
     function handleSetNLInput(e){
         setInput(e.target.value);
+    }
+
+    async function retrieveOutput(type){
+        try{
+            const response = await axios.post('http://localhost:5000/'+type);
+            setTranslatorOutput(response);
+        }catch(e){
+            setTranslatorOutput('Error');
+        }
+    }
+
+    function handleTranslateCode() {
+        retrieveOutput('prompt-assistance');
+    }
+
+
+    function handleQueryError(){
+        retrieveOutput('query-error');
     }
 
     return (
@@ -41,11 +50,18 @@ function NLTranslator( {code} ) {
                 value={input}
                 onChange={handleSetNLInput}
             />
+            
+            <div style={{flex: 1, display: 'flex'}}>
 
-            <button onClick={handleTranslateCode} style = {{flex: 1}}>
-                Enter
-            </button>
+                <button onClick={handleTranslateCode} style = {{flex: 3}}>
+                    Enter
+                </button>
 
+                <button onClick={handleQueryError} style={{flex: 1}}>
+                    Query Error
+                </button>
+
+            </div>
         </div>
     );
 }
