@@ -30,8 +30,6 @@ function NLTranslator( {code} ) {
     return (
         <div className="nl-translator" style = {translatorStyle}>
 
-            <h2>Instructor Code Assistance</h2>
-
             <textarea
                 style = {{flex: 7}}
                 readOnly

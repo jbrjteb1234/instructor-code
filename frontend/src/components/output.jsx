@@ -4,6 +4,14 @@ function CodeOutput( {code} ) {
     const [output, setOutput] = useState('');
     const [pyodide, setPyodide] = useState(null);
 
+    const translatorStyle = {
+        height: '100%',
+        width: '100%',
+        display: 'flex', 
+        flex: 1, 
+        flexDirection: 'column',
+    };
+
     function handleQueryError(){
         
     }
@@ -50,23 +58,23 @@ function CodeOutput( {code} ) {
     }
 
     return (
-        <div className="code-output">
-
-            <h2>Python Console Output</h2>
+        <div className="code-output" style={translatorStyle}>
 
             <textarea
+                style={{flex: 8}}
                 value={output} 
                 readOnly 
-                rows="10" 
             />
 
-            <button onClick={handleExecuteCode}>
-                Execute Code
-            </button>
+            <div style={{flex: 2, display: 'flex'}}>
+                <button onClick={handleExecuteCode} style={{flex: 3}}>
+                    Execute Code
+                </button>
 
-            <button onClick={handleQueryError}>
-                Query error
-            </button>
+                <button onClick={handleQueryError} style={{flex: 1}}>
+                    Query Error
+                </button>
+            </div>
 
         </div>
     );
