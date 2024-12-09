@@ -19,9 +19,24 @@ function NLTranslator( {code} ) {
     }
 
     async function retrieveOutput(type){
+        console.log(`Making request to: http://localhost:5000/${type}`);
         try{
-            const data = {code: code};
-            const response = await axios.post('http://localhost:5000/'+type, code);
+            const response = await axios.post(
+                `http://localhost:5000/${type}`,
+
+                {
+                    code: code,
+                    prompt: input
+                },
+
+                {
+                    headers: {
+                        'Content-Type': 'application/json', 
+                    },
+                }
+
+            );
+
             setTranslatorOutput(response);
         }catch(e){
             setTranslatorOutput('Error');
