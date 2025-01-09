@@ -56,11 +56,23 @@ function CodeOutput( {code} ) {
     return (
         <div className="code-output" style={translatorStyle}>
 
-            <textarea
-                style={{flex: 9}}
-                value={output} 
-                readOnly 
-            />
+        <textarea
+            style={{
+                flex: 9,
+                backgroundColor: '#141414',
+                color: '#d8d8d8',          
+                fontFamily: 'monospace',    
+                fontSize: '14px',          
+                border: '1px solid #444',  
+                borderRadius: '4px',       
+                padding: '10px',           
+                overflowY: 'scroll',       
+                whiteSpace: 'pre-wrap',    
+                resize: 'none'              
+            }}
+            value={output}
+            readOnly
+        />
 
             <button onClick={handleExecuteCode} style={{flex: 1}}>
                 Execute Code
