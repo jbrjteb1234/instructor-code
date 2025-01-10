@@ -37,7 +37,7 @@ function NLTranslator( {code} ) {
 
             );
 
-            setTranslatorOutput(response);
+            setTranslatorOutput(response.data || "No response");
         }catch(e){
             setTranslatorOutput('Error');
         }
