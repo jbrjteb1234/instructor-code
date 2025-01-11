@@ -1,18 +1,36 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import ReactMarkdown from 'react-markdown';
 
 function NLTranslator( {code} ) {
 
     const [input, setInput] = useState('');
     const [translatorOutput, setTranslatorOutput] = useState('')
 
-    const translatorStyle = {
+    const translatorContainerStyle = {
         height: '100%',
         width: '100%',
         display: 'flex', 
         flex: 1, 
         flexDirection: 'column',
+        overflow: 'hidden',
     };
+
+    const translatorOutputStyle = {
+        flex: 7, 
+        paddingLeft: '10px',
+        paddingRight: '10px', 
+        fontFamily: 'Arial, sans-serif', 
+        overflowY: 'scroll'
+    };
+
+    const translatorInputStyle = {
+        flex: 1, 
+        paddingLeft: '1px', 
+        paddingRight: '6px', 
+        paddingBottom: '5px',
+        fontFamily: 'Arial, sans-serif',
+    }
 
     function handleSetNLInput(e){
         setInput(e.target.value);
@@ -52,20 +70,22 @@ function NLTranslator( {code} ) {
         retrieveOutput('query-error');
     }
 
+    
     return (
-        <div className="nl-translator" style = {translatorStyle}>
+        <div className="nl-translator" style = {translatorContainerStyle}>
 
-            <textarea
-                style = {{flex: 7}}
-                readOnly
-                value={translatorOutput}
-            />
+            
+            <div style = {translatorOutputStyle}>
+                <ReactMarkdown>{translatorOutput}</ReactMarkdown>
+            </div>
 
-            <textarea
-                style = {{flex: 2}}
-                value={input}
-                onChange={handleSetNLInput}
-            />
+            <div style = {translatorInputStyle}>
+                <textarea
+                    style = {{height: '100%', width: '100%'}}
+                    value={input}
+                    onChange={handleSetNLInput}
+                />
+            </div>
             
             <div style={{flex: 1, display: 'flex'}}>
 
