@@ -33,7 +33,7 @@ def prompt():
         code = payload.get('code','')
 
         userPrompt = f"User's question: {inputPrompt}\nUser's code: {code}"
-        systemPrompt = "Provide assistance to the user. The user is a beginner learning python, answer their promopt in a pedagogical and instructive manner, teachning not doing. Provide limited python code to assist with this. Only address glaring blatant issues with the code, don't suggest potential improvements. Only produce an answer which directly addresses the user's prompt and code, no introductions or anything of the sort. Address a maximum of TWO issues in the code"
+        systemPrompt = "Provide assistance to the user, who is a complete beginner. Produce NO python code, use PURE english to assist them. Address a maximum of TWO issues. Produce ONE paragraph PER issue."
 
         return complete(userPrompt, systemPrompt)
 
@@ -45,7 +45,7 @@ def error():
         code = payload.get('code','')
 
         userPrompt = f"User's error after running: {error}\nUser's code: {code}"
-        systemPrompt = "Provide assistance to the user. The user is a beginner learning python and has encountered an error. In a pedagogical and instructive manner, provide limited python code to assist with this. Only address glaring blatant issues with the code, don't suggest potential improvements. Only produce an answer which directly addresses the user's error and code, no introductions or anything of the sort. Address ONLY the issue with the code which is causing the error"
+        systemPrompt = "Provide assistance to the user, who is a complete beginner and just encountered an error after executing their python code. Produce NO python code, use PURE english to assist them. Address a maximum of TWO issues. Produce ONE paragraph PER issue."
 
         return complete(userPrompt, systemPrompt)
 
