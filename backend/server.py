@@ -28,37 +28,37 @@ def complete(userPrompt, systemPrompt):
 @app.route('/prompt-assistance', methods=['POST'])
 def prompt():
 
-        payload = request.json
-        inputPrompt = payload.get('prompt','')
-        code = payload.get('code','')
+    payload = request.json
+    inputPrompt = payload.get('prompt','')
+    code = payload.get('code','')
 
-        userPrompt = f"User's question: {inputPrompt}\nUser's code: {code}"
-        systemPrompt = "Provide assistance to the user, who is a complete beginner. Produce NO python code, use PURE english to assist them. Address a maximum of TWO issues. Produce ONE paragraph PER issue."
+    userPrompt = f"User's question: {inputPrompt}\nUser's code: {code}"
+    systemPrompt = "Provide assistance to the user, who is a complete beginner. Produce NO python code, use PURE english to assist them. Address a maximum of TWO issues. Produce ONE paragraph PER issue."
 
-        return complete(userPrompt, systemPrompt)
+    return complete(userPrompt, systemPrompt)
 
 @app.route('/query-error', methods=['POST'])
 def error():
 
-        payload = request.json
-        error = payload.get('prompt','')
-        code = payload.get('code','')
+    payload = request.json
+    error = payload.get('prompt','')
+    code = payload.get('code','')
 
-        userPrompt = f"User's error after running: {error}\nUser's code: {code}"
-        systemPrompt = "Provide assistance to the user, who is a complete beginner and just encountered an error after executing their python code. Produce NO python code, use PURE english to assist them. Address a maximum of TWO issues. Produce ONE paragraph PER issue."
+    userPrompt = f"User's error after running: {error}\nUser's code: {code}"
+    systemPrompt = "Provide assistance to the user, who is a complete beginner and just encountered an error after executing their python code. Produce NO python code, use PURE english to assist them. Address a maximum of TWO issues. Produce ONE paragraph PER issue."
 
-        return complete(userPrompt, systemPrompt)
+    return complete(userPrompt, systemPrompt)
 
 @app.route('/status', methods=['GET'])
 def status():
-        exam = os.getenv('EXAM').lower() == '1'
+    exam = os.getenv('EXAM').lower() == '1'
 
-        statusResult = jsonify({
-            "status": "ok",
-            "examLoaded": exam
-        })
+    statusResult = jsonify({
+        "status": "ok",
+        "examLoaded": exam
+    })
 
-        return statusResult
+    return statusResult
 
 if __name__ == "__main__":
     app.run(debug=True)
