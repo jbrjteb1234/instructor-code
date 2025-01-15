@@ -51,7 +51,7 @@ def error():
 
 @app.route('/status', methods=['GET'])
 def status():
-    exam = os.getenv('EXAM').lower() == '1'
+    exam = os.getenv('EXAM') == '1'
 
     statusResult = jsonify({
         "status": "ok",
