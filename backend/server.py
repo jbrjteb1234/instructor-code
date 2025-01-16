@@ -3,9 +3,12 @@ from flask_cors import CORS
 from openai import OpenAI
 import os
 from dotenv import load_dotenv
+import logging
 
 app = Flask(__name__)
 CORS(app)
+
+logging.basicConfig(level=logging.INFO)
 
 load_dotenv()
 client = OpenAI()
@@ -59,6 +62,29 @@ def status():
     })
 
     return statusResult
+
+@app.route('/begin-exam', methods=['GET'])
+def beginExam():
+    
+    try:
+        examTime = int(os.getenv('EXAM_TIME'), '30')*60
+    except ValueError:
+        logging.error("Invalid exam time, must be integer. Defaulting to 30 minutes")
+        examTime = 30*60
+
+    try:
+        with open('exam.txt', 'r') as file:
+            exam = file.read()
+            logging.info("Successfully read exam file")
+    except FileNotFoundError:
+        return jsonify({"error": "File not found"}),404
+    except Exception as e:
+        return jsonify({"error": f"An unexpected error has occured: {str(e)}"}),500
+
+    return jsonify({
+        "examTime": examTime,
+        "exam": exam
+    })
 
 if __name__ == "__main__":
     app.run(debug=True)
