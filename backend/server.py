@@ -56,12 +56,10 @@ def error():
 def status():
     exam = os.getenv('EXAM') == '1'
 
-    statusResult = jsonify({
+    return jsonify({
         "status": "ok",
         "examLoaded": exam
-    })
-
-    return statusResult
+    }), 200
 
 @app.route('/begin-exam', methods=['GET'])
 def beginExam():
