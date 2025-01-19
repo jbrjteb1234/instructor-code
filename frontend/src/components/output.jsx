@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-function CodeOutput( {code} ) {
+function CodeOutput( {code, examSet} ) {
     const [output, setOutput] = useState('');
     const [pyodide, setPyodide] = useState(null);
 
@@ -53,30 +53,50 @@ function CodeOutput( {code} ) {
         }
     }
 
+    function handleBeginExam() {
+
+    }
+
     return (
         <div className="code-output" style={translatorStyle}>
 
-        <textarea
-            style={{
-                flex: 9,
-                backgroundColor: '#141414',
-                color: '#d8d8d8',          
-                fontFamily: 'monospace',    
-                fontSize: '14px',          
-                border: '1px solid #444',  
-                borderRadius: '4px',       
-                padding: '10px',           
-                overflowY: 'scroll',       
-                whiteSpace: 'pre-wrap',    
-                resize: 'none'              
-            }}
-            value={output}
-            readOnly
-        />
+            <textarea
+                style={{
+                    flex: 9,
+                    backgroundColor: '#141414',
+                    color: '#d8d8d8',          
+                    fontFamily: 'monospace',    
+                    fontSize: '14px',          
+                    border: '1px solid #444',  
+                    borderRadius: '4px',       
+                    padding: '10px',           
+                    overflowY: 'scroll',       
+                    whiteSpace: 'pre-wrap',    
+                    resize: 'none'              
+                }}
+                value={output}
+                readOnly
+            />
 
-            <button onClick={handleExecuteCode} style={{flex: 1}}>
-                Execute Code
-            </button>
+            {examSet ? (
+                <div stlye={{display: 'flex', flex: 1}}>
+                    
+                    <button onClick={handleExecuteCode} style={{ flex: 3 }}>
+                        Execute Code
+                    </button>
+
+                    <button onClick={handleBeginExam} style={{ flex: 1 }}>
+                        Begin exam
+                    </button>
+
+                </div>
+            ) : 
+                <button onClick={handleExecuteCode} style={{ flex: 1 }}>
+                    Execute Code
+                </button>
+            }
+
+            
 
         </div>
     );

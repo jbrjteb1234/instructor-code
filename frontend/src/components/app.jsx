@@ -7,23 +7,23 @@ import CodeOutput from './output.jsx';
 function App() {
 
     const [code, setCode] = useState('');
-    const [state, setState] = useState('');
+    const [exam, setExam] = useState('');
 
     //checks the server is operational and if an exam is loaded
     useEffect(() => {
         async function statusCheck() {
             try {
-                response = await fetch('http://localhost:5000/status')
-                payload = await response.json();
+                let response = await fetch('http://localhost:5000/status');
+                let payload = await response.json();
 
                 if(response.ok){
-                    setState(true);
-                    console.log('Established connection with server.');
+                    console.log(`Established connection with server.`);
+                    setExam(payload.examLoaded);
                 }else{
-                    console.log('Error establishing connection with server.\nResponse code: ${response.status},\nResponse text: ${response.statusText}');
+                    console.log(`Error establishing connection with server.\nResponse code: ${response.status},\nResponse text: ${response.statusText}`);
                 }
             }catch(e){
-                console.error('Unexpected error: ${e}');
+                console.error(`Unexpected error: ${e}`);
             }    
         }
 
@@ -53,15 +53,13 @@ function App() {
                 </div>
 
                 <div style={{flex: 1}}>
-                    <CodeOutput code={code} />
+                    <CodeOutput code={code} examSet={exam} />
                 </div>
 
             </div>
 
             <div style={{flex: 1}}>
-
                 <PythonEditor code={code} setCode={setCode} />
-
             </div>
             
         </div>
