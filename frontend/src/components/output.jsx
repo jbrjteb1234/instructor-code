@@ -79,7 +79,7 @@ function CodeOutput( {code, examSet} ) {
             />
 
             {examSet ? (
-                <div stlye={{display: 'flex', flex: 1}}>
+                <div style={{display: 'flex', flex: 1}}>
                     
                     <button onClick={handleExecuteCode} style={{ flex: 3 }}>
                         Execute Code
@@ -95,8 +95,6 @@ function CodeOutput( {code, examSet} ) {
                     Execute Code
                 </button>
             }
-
-            
 
         </div>
     );
