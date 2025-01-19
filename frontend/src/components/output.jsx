@@ -42,11 +42,14 @@ function CodeOutput( {code, examSet} ) {
                 sys.stdout = StringIO()
             `);
             
-            //Execute the user's code
-            await pyodide.runPythonAsync(code);
-
-            const result = await pyodide.runPythonAsync('sys.stdout.getvalue()');
-            setOutput(result);
+            // Execute the user's code
+            try{
+                await pyodide.runPythonAsync(code);
+                setOutput(await pyodide.runPythonAsync('sys.stdout.getvalue()'));
+            }catch(e){
+                let errorMessage = e.message || e.toString();
+                setOutput(errorMessage.split('\n').slice(-2,-1)[0].trim());
+            }
 
         } catch (error) {
             setOutput(`Error: ${error.message}`);
