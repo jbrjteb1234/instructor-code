@@ -20,7 +20,7 @@ def complete(userPrompt, systemPrompt):
             {"role": "user", "content": userPrompt}
         ],
         model="gpt-4o-mini", 
-        maxTokens=1024,
+        max_tokens=1024,
         temperature=0.7
     )
 
@@ -36,7 +36,7 @@ def prompt():
     code = payload.get('code','')
 
     userPrompt = f"User's question: {inputPrompt}\nUser's code: {code}"
-    systemPrompt = "Provide assistance to the user, who is a complete beginner. Produce NO python code, use PURE english to assist them. Address a maximum of TWO issues. Produce ONE paragraph PER issue."
+    systemPrompt = "Provide assistance to the user, who is a complete beginner. Produce NO python code, use PURE english to assist them but never typing out the correct code. In ONE paragraph Address a maximum of TWO issues."
 
     return complete(userPrompt, systemPrompt)
 
@@ -48,7 +48,7 @@ def error():
     code = payload.get('code','')
 
     userPrompt = f"User's error after running: {error}\nUser's code: {code}"
-    systemPrompt = "Provide assistance to the user, who is a complete beginner and just encountered an error after executing their python code. Produce NO python code, use PURE english to assist them. Address a maximum of TWO issues. Produce ONE paragraph PER issue."
+    systemPrompt = "Provide assistance to the user, who is a complete beginner and just encountered an error after executing their python code. Produce NO python code, use PURE english to assist them but never typing out the correct code. In ONE paragraph Address a maximum of TWO issues."
 
     return complete(userPrompt, systemPrompt)
 
