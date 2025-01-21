@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-function Exam( {examText, setExamExpanded, code} ){
+function Exam( {examText, setExamExpanded, code, examTimeRemaining} ){
 
     const examContainerStyle = {
         height: '100%',
@@ -18,6 +18,18 @@ function Exam( {examText, setExamExpanded, code} ){
         paddingRight: '10px', 
         fontFamily: 'Arial, sans-serif', 
         overflowY: 'scroll'
+    };
+
+    const examTimerStyle = {
+        flex: 1,
+        backgroundColor: '#141414',
+        color: '#d8d8d8',          
+        fontFamily: 'monospace',  
+        paddingTop: '12px',  
+        fontSize: '22px',          
+        textAlign: 'center', 
+        whiteSpace: 'pre-wrap',    
+        resize: 'none' 
     };
 
     async function handleSubmitExam(){
@@ -42,6 +54,12 @@ function Exam( {examText, setExamExpanded, code} ){
         }
     }
 
+    function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const secs = seconds % 60; 
+        return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }    
+
     function handleExpandExam(){
         setExamExpanded(false);
     }
@@ -56,8 +74,14 @@ function Exam( {examText, setExamExpanded, code} ){
             />
 
             <div style={{display: 'flex', flex: 1}}>
+
+                <textarea
+                    readOnly
+                    value={formatTime(examTimeRemaining)}
+                    style={examTimerStyle}
+                />
                     
-                <button onClick={handleSubmitExam} style={{ flex: 3 }}>
+                <button onClick={handleSubmitExam} style={{ flex: 2 }}>
                     Submit
                 </button>
 

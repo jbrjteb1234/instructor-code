@@ -25,7 +25,6 @@ function App() {
                     clearInterval(timer);
                     return 0;
                 }
-                console.log(examTimeRemaining);
                 return prevTime-1;
             });
         },1000);
@@ -106,7 +105,7 @@ function App() {
 
             {examExpanded ?
                 
-                <Exam examText={examText} setExamExpanded={setExamExpanded} code={code} />
+                <Exam examText={examText} setExamExpanded={setExamExpanded} code={code} examTimeRemaining={examTimeRemaining} />
 
             :
                 <div style={columnContainerStyle}>
