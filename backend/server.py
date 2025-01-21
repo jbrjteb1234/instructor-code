@@ -65,7 +65,7 @@ def status():
 def beginExam():
     
     try:
-        examTime = int(os.getenv('EXAM_TIME'), '30')*60
+        examTime = int(os.getenv('EXAM_TIME', '30'))*60
     except ValueError:
         logging.error("Invalid exam time, must be integer. Defaulting to 30 minutes")
         examTime = 30*60
