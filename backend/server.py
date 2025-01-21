@@ -66,7 +66,7 @@ def beginExam():
     try:
         examTime = int(os.getenv('EXAM_TIME', '30'))*60
     except ValueError:
-        logging.error("Invalid exam time, must be integer. Defaulting to 30 minutes")
+        app.logger.error("Invalid exam time, must be integer. Defaulting to 30 minutes")
         examTime = 30*60
 
     try:
@@ -88,7 +88,7 @@ def submitExam():
     payload = request.json
     submission = payload.get('submission','')
 
-    logging.info(submission)
+    app.logger.info(submission)
     #TODO: implement grading system
 
     return '',204
