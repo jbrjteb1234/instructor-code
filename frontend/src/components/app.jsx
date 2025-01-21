@@ -10,11 +10,23 @@ function App() {
     const [examEnabled, setExamEnabled] = useState('');
     const [examExpanded, setExamExpanded] = useState(false);
     const [examBegan, setExamBegan] = useState(false);
+    const [examText, setExamText] = useState('');
 
-    function beginExam(){
+    async function beginExam(){
         if(!examBegan){
             setExamBegan(true);
             setExamExpanded(true);
+
+            let response = await fetch('http://localhost:5000/begin-exam');
+            let payload = await response.json();
+
+            if(response.ok){
+                let timeRemaining = payload.examTime;
+                setExamText(payload.exam);
+            }else{
+                console.log(`Error communicating with begin exam endpoint.\nResponse code: ${response.status},\nResponse text: ${response.statusText}`)
+            }
+
         }
     }
 
@@ -59,7 +71,8 @@ function App() {
                 <div style={{flex: 1}}>
                     
                     <textarea
-                        Exam placeholder
+                        value={examText}
+                        readOnly
                     />
 
                 </div>
