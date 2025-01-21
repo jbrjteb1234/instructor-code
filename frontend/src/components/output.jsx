@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, pyodide } from 'react';
 
-function CodeOutput( {code, examEnabled, examBegan, setExamExpanded, beginExam} ) {
+function CodeOutput( {code, examEnabled, examBegan, setExamExpanded, beginExam, pyodide} ) {
     const [output, setOutput] = useState('');
-    const [pyodide, setPyodide] = useState(null);
 
     const translatorStyle = {
         height: '100%',
@@ -10,21 +9,7 @@ function CodeOutput( {code, examEnabled, examBegan, setExamExpanded, beginExam} 
         display: 'flex', 
         flex: 1, 
         flexDirection: 'column',
-    };
-
-    useEffect(function () {
-        async function loadPyodideInstance() {
-            try {
-                const pyodideInstance = await window.loadPyodide();
-                setPyodide(pyodideInstance);
-                console.log("Pyodide loaded.")
-            } catch (error) {
-                console.error('Error loading Pyodide: ', error);
-            }
-        }
-
-        loadPyodideInstance();
-    }, []); 
+    }; 
 
     async function handleExecuteCode() {
 

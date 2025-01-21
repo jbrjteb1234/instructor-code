@@ -12,6 +12,7 @@ function App() {
     const [examExpanded, setExamExpanded] = useState(false);
     const [examBegan, setExamBegan] = useState(false);
     const [examText, setExamText] = useState('');
+    const [pyodide, setPyodide] = useState(null);
 
     async function beginExam(){
         if(!examBegan){
@@ -52,6 +53,21 @@ function App() {
         statusCheck();
     },[])
 
+    //preload pyodide
+    useEffect(function () {
+        async function loadPyodideInstance() {
+            try {
+                const pyodideInstance = await window.loadPyodide();
+                setPyodide(pyodideInstance);
+                console.log("Pyodide loaded.")
+            } catch (error) {
+                console.error('Error loading Pyodide: ', error);
+            }
+        }
+
+        loadPyodideInstance();
+    }, []);
+
     const containerStyle = {
         height: '100vh', 
         display: 'flex',
@@ -80,7 +96,7 @@ function App() {
                     </div>
                     
                     <div style={{flex: 1}}>
-                        <CodeOutput code={code} examEnabled={examEnabled} examBegan={examBegan} beginExam={beginExam} setExamExpanded={setExamExpanded} />
+                        <CodeOutput code={code} examEnabled={examEnabled} examBegan={examBegan} beginExam={beginExam} setExamExpanded={setExamExpanded} pyodide={pyodide}/>
                     </div>
                 
                 </div>
