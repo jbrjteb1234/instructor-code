@@ -1,6 +1,7 @@
 import React from 'react';
+import axios from 'axios';
 
-function Exam( {examText, setExamExpanded} ){
+function Exam( {examText, setExamExpanded, code} ){
 
     const examContainerStyle = {
         height: '100%',
@@ -19,8 +20,26 @@ function Exam( {examText, setExamExpanded} ){
         overflowY: 'scroll'
     };
 
-    function handleSubmitExam(){
+    async function handleSubmitExam(){
+        try{
+            const response = await axios.put(
+                `http://localhost:5000/submit-exam`,
 
+                {
+                    submission: code,
+                },
+
+                {
+                    headers: {
+                        'Content-Type': 'application/json', 
+                    },
+                }
+
+            );
+            console.log("Submission complete.")
+        }catch(e){
+            console.log(`Unexpected error submitting exam\nStatus code: ${e.response.status}`);
+        }
     }
 
     function handleExpandExam(){
