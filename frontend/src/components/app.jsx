@@ -22,6 +22,8 @@ function App() {
         const timer = setInterval(()=>{
             setExamTimeRemaining((prevTime)=>{
                 if(prevTime <= 1){
+                    setExamExpanded(false);
+                    setExamBegan(false);
                     clearInterval(timer);
                     return 0;
                 }
@@ -35,13 +37,13 @@ function App() {
 
     async function beginExam(){
         if(!examBegan){
-            setExamBegan(true);
-            setExamExpanded(true);
 
             let response = await fetch('http://localhost:5000/begin-exam');
             let payload = await response.json();
 
             if(response.ok){
+                setExamBegan(true);
+                setExamExpanded(true);    
                 setExamTimeRemaining(payload.examTime);
                 setExamText(payload.exam);
             }else{
