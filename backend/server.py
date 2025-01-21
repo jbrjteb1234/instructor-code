@@ -88,7 +88,7 @@ def submitExam():
     payload = request.json
     submission = payload.get('submission','')
 
-    app.logger.info(submission)
+    app.logger.info("User submission: "+submission)
     #TODO: implement grading system
 
     return '',204
