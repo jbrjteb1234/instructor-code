@@ -7,8 +7,7 @@ import logging
 
 app = Flask(__name__)
 CORS(app)
-
-logging.basicConfig(level=logging.INFO)
+app.logger.setLevel(logging.INFO) 
 
 load_dotenv()
 client = OpenAI()
@@ -73,7 +72,7 @@ def beginExam():
     try:
         with open('exam.txt', 'r') as file:
             exam = file.read()
-            logging.info("Successfully read exam file")
+            app.logger.info("Successfully read exam file")
     except FileNotFoundError:
         return jsonify({"error": "File not found"}),404
     except Exception as e:
@@ -95,4 +94,4 @@ def submitExam():
     return '',204
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
