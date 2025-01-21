@@ -86,7 +86,7 @@ function Exam( {examText, setExamExpanded, code, examTimeRemaining} ){
                 </button>
 
                 <button onClick={handleExpandExam} style={{ flex: 1 }}>
-                    Close exam
+                    Close exam brief
                 </button>
 
             </div>
