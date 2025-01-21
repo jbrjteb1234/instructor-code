@@ -3,6 +3,7 @@ import axios from 'axios';
 import PythonEditor from './python_editor.jsx';
 import NLTranslator from './nl_translator.jsx';
 import CodeOutput from './output.jsx';
+import Exam from './exam.jsx';
 
 function App() {
 
@@ -68,14 +69,9 @@ function App() {
         <div style={containerStyle}>
 
             {examExpanded ?
-                <div style={{flex: 1}}>
-                    
-                    <textarea
-                        value={examText}
-                        readOnly
-                    />
+                
+                <Exam examText={examText} />
 
-                </div>
             :
                 <div style={columnContainerStyle}>
                     
