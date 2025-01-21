@@ -38,7 +38,7 @@ def prompt():
     userPrompt = f"User's question: {inputPrompt}\nUser's code: {code}"
     systemPrompt = "Provide assistance to the user, who is a complete beginner. Produce NO python code, use PURE english to assist them but never typing out the correct code. In ONE paragraph Address a maximum of TWO issues."
 
-    return complete(userPrompt, systemPrompt)
+    return complete(userPrompt, systemPrompt), 200
 
 @app.route('/query-error', methods=['POST'])
 def error():
@@ -50,7 +50,7 @@ def error():
     userPrompt = f"User's error after running: {error}\nUser's code: {code}"
     systemPrompt = "Provide assistance to the user, who is a complete beginner and just encountered an error after executing their python code. Produce NO python code, use PURE english to assist them but never typing out the correct code. In ONE paragraph Address a maximum of TWO issues."
 
-    return complete(userPrompt, systemPrompt)
+    return complete(userPrompt, systemPrompt), 200
 
 @app.route('/status', methods=['GET'])
 def status():
@@ -82,7 +82,7 @@ def beginExam():
     return jsonify({
         "examTime": examTime,
         "exam": exam
-    })
+    }), 200
 
 @app.route('/submit-exam', methods=['PUT'])
 def submitExam():
@@ -91,7 +91,7 @@ def submitExam():
 
     #TODO: implement grading system
 
-    return ''
+    return '',204
 
 if __name__ == "__main__":
     app.run(debug=True)
