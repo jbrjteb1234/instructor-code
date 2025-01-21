@@ -12,7 +12,27 @@ function App() {
     const [examExpanded, setExamExpanded] = useState(false);
     const [examBegan, setExamBegan] = useState(false);
     const [examText, setExamText] = useState('');
+    const [examTimeRemaining, setExamTimeRemaining] = useState('');
     const [pyodide, setPyodide] = useState(null);
+
+    //countdown timer for exam
+    useEffect(() => {
+        if (!examBegan || !examTimeRemaining) return;
+
+        const timer = setInterval(()=>{
+            setExamTimeRemaining((prevTime)=>{
+                if(prevTime <= 1){
+                    clearInterval(timer);
+                    return 0;
+                }
+                console.log(examTimeRemaining);
+                return prevTime-1;
+            });
+        },1000);
+
+        return () => clearInterval(timer);
+
+    },[examTimeRemaining]);
 
     async function beginExam(){
         if(!examBegan){
@@ -23,7 +43,7 @@ function App() {
             let payload = await response.json();
 
             if(response.ok){
-                let timeRemaining = payload.examTime;
+                setExamTimeRemaining(payload.examTime);
                 setExamText(payload.exam);
             }else{
                 console.log(`Error communicating with begin exam endpoint.\nResponse code: ${response.status},\nResponse text: ${response.statusText}`)
