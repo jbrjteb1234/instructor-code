@@ -70,7 +70,7 @@ function App() {
 
             {examExpanded ?
                 
-                <Exam examText={examText} />
+                <Exam examText={examText} setExamExpanded={setExamExpanded} />
 
             :
                 <div style={columnContainerStyle}>

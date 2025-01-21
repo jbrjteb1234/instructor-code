@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Exam( {examText} ){
+function Exam( {examText, setExamExpanded} ){
 
     const examContainerStyle = {
         height: '100%',
@@ -24,7 +24,7 @@ function Exam( {examText} ){
     }
 
     function handleExpandExam(){
-        
+        setExamExpanded(false);
     }
 
     return(
