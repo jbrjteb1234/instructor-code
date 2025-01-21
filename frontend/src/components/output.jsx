@@ -1,4 +1,4 @@
-import React, { useEffect, useState, pyodide } from 'react';
+import React, { useState } from 'react';
 
 function CodeOutput( {code, examEnabled, examBegan, setExamExpanded, beginExam, pyodide} ) {
     const [output, setOutput] = useState('');
