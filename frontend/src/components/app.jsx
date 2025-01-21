@@ -7,7 +7,16 @@ import CodeOutput from './output.jsx';
 function App() {
 
     const [code, setCode] = useState('');
-    const [exam, setExam] = useState('');
+    const [examEnabled, setExamEnabled] = useState('');
+    const [examExpanded, setExamExpanded] = useState(false);
+    const [examBegan, setExamBegan] = useState(false);
+
+    function beginExam(){
+        if(!examBegan){
+            setExamBegan(true);
+            setExamExpanded(true);
+        }
+    }
 
     //checks the server is operational and if an exam is loaded
     useEffect(() => {
@@ -18,7 +27,7 @@ function App() {
 
                 if(response.ok){
                     console.log(`Established connection with server.`);
-                    setExam(payload.examLoaded);
+                    setExamEnabled(payload.examLoaded);
                 }else{
                     console.log(`Error establishing connection with server.\nResponse code: ${response.status},\nResponse text: ${response.statusText}`);
                 }
@@ -46,17 +55,27 @@ function App() {
     return (
         <div style={containerStyle}>
 
-            <div style={columnContainerStyle}>
-
+            {examExpanded ?
                 <div style={{flex: 1}}>
-                    <NLTranslator code={code} />
-                </div>
+                    
+                    <textarea
+                        Exam placeholder
+                    />
 
-                <div style={{flex: 1}}>
-                    <CodeOutput code={code} examSet={exam} />
                 </div>
-
-            </div>
+            :
+                <div style={columnContainerStyle}>
+                    
+                    <div style={{flex: 1}}>
+                        <NLTranslator code={code} />
+                    </div>
+                    
+                    <div style={{flex: 1}}>
+                        <CodeOutput code={code} examEnabled={examEnabled} examBegan={examBegan} beginExam={beginExam} setExamExpanded={setExamExpanded} />
+                    </div>
+                
+                </div>
+            }
 
             <div style={{flex: 1}}>
                 <PythonEditor code={code} setCode={setCode} />

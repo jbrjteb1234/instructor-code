@@ -87,7 +87,7 @@ function NLTranslator( {code} ) {
                 />
             </div>
             
-            <div style={{flex: 1, display: 'flex'}}>
+            <div style={{flex: 1, display: 'flex', height: '100%', width: '100%'}}>
 
                 <button onClick={handleTranslateCode} style = {{flex: 3}}>
                     Enter
