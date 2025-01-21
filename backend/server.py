@@ -84,5 +84,14 @@ def beginExam():
         "exam": exam
     })
 
+@app.route('/submit-exam', methods=['PUT'])
+def submitExam():
+    payload = request.json()
+    submission = payload.get('submission','')
+
+    #TODO: implement grading system
+
+    return ''
+
 if __name__ == "__main__":
     app.run(debug=True)
