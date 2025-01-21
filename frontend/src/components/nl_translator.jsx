@@ -26,6 +26,7 @@ function NLTranslator( {code} ) {
 
     const translatorInputStyle = {
         flex: 1, 
+        resize: 'none',
         paddingLeft: '1px', 
         paddingRight: '6px', 
         paddingBottom: '5px',
@@ -79,15 +80,13 @@ function NLTranslator( {code} ) {
                 <ReactMarkdown>{translatorOutput}</ReactMarkdown>
             </div>
 
-            <div style = {translatorInputStyle}>
-                <textarea
-                    style = {{height: '100%', width: '100%'}}
-                    value={input}
-                    onChange={handleSetNLInput}
-                />
-            </div>
-            
-            <div style={{flex: 1, display: 'flex', height: '100%', width: '100%'}}>
+            <textarea
+                style = {translatorInputStyle}
+                value={input}
+                onChange={handleSetNLInput}
+            />
+        
+            <div style={{flex: 1, display: 'flex', flexGrow: 0, flexShrink: 0}}>
 
                 <button onClick={handleTranslateCode} style = {{flex: 3}}>
                     Enter

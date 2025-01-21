@@ -13,7 +13,7 @@ function Exam( {examText, setExamExpanded, code, examTimeRemaining} ){
     };
 
     const examBriefStyle = {
-        flex: 18, 
+        flex: 19, 
         paddingLeft: '10px',
         paddingRight: '10px', 
         fontFamily: 'Arial, sans-serif', 
@@ -25,11 +25,11 @@ function Exam( {examText, setExamExpanded, code, examTimeRemaining} ){
         backgroundColor: '#141414',
         color: '#d8d8d8',          
         fontFamily: 'monospace',  
-        paddingTop: '12px',  
-        fontSize: '22px',          
+        fontSize: '2rem',      
         textAlign: 'center', 
         whiteSpace: 'pre-wrap',    
-        resize: 'none' 
+        resize: 'none',
+        overflow: 'hidden'
     };
 
     async function handleSubmitExam(){
@@ -73,7 +73,7 @@ function Exam( {examText, setExamExpanded, code, examTimeRemaining} ){
                 style={examBriefStyle}
             />
 
-            <div style={{display: 'flex', flex: 1}}>
+            <div style={{display: 'flex', flex: 1, flexGrow: 0, flexShrink: 0}}>
 
                 <textarea
                     readOnly

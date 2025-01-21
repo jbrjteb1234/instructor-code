@@ -70,7 +70,7 @@ function CodeOutput( {code, examEnabled, examBegan, setExamExpanded, beginExam, 
             />
 
             {examEnabled ?
-                <div style={{display: 'flex', flex: 1}}>
+                <div style={{display: 'flex', flex: 1, flexGrow: 0, flexShrink: 0}}>
                     
                     <button onClick={handleExecuteCode} style={{ flex: 3 }}>
                         Execute Code
@@ -88,7 +88,7 @@ function CodeOutput( {code, examEnabled, examBegan, setExamExpanded, beginExam, 
 
                 </div>
             : 
-                <button onClick={handleExecuteCode} style={{ flex: 1 }}>
+                <button onClick={handleExecuteCode} style={{ flex: 1, flexGrow: 0, flexShrink: 0}}>
                     Execute Code
                 </button>
             }
