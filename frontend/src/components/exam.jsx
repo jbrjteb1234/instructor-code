@@ -17,6 +17,7 @@ function Exam( {examText, setExamExpanded, code, examTimeRemaining} ){
         paddingLeft: '10px',
         paddingRight: '10px', 
         fontFamily: 'Arial, sans-serif', 
+        resize: 'none',
         overflowY: 'scroll'
     };
 
