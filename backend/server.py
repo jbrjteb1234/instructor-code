@@ -3,8 +3,8 @@ from flask_cors import CORS
 from openai import OpenAI
 import os
 from dotenv import load_dotenv
+from datetime import date
 import logging
-from grader import grade
 
 app = Flask(__name__)
 CORS(app)
@@ -89,8 +89,12 @@ def submitExam():
     payload = request.json
     submission = payload.get('submission','')
 
-    app.logger.info("User submission: "+"\n"+submission+"\n")
-    grade(submission)
+    try:
+        with open('submissions.txt', 'a') as file:
+            file.write(f"\n\nSubmission {date.today().day}/{date.today().month}/{date.today().year}:\n{submission}")
+            app.logger.info("Successfully recorded submission")
+    except Exception as e:
+        app.logger.info("Error recording submission - ensure submissions.txt is in root directory")
 
     return '',204
 
