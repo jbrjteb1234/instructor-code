@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-function Exam( {examText, setExamExpanded, code, examTimeRemaining} ){
+function Exam( {examText, setExamExpanded, setExamBegan, code, examTimeRemaining} ){
 
     const examContainerStyle = {
         height: '100%',
@@ -53,6 +53,8 @@ function Exam( {examText, setExamExpanded, code, examTimeRemaining} ){
         }catch(e){
             console.log(`Unexpected error submitting exam\nStatus code: ${e.response.status}`);
         }
+        setExamExpanded(false);
+        setExamBegan(false);
     }
 
     function formatTime(seconds) {

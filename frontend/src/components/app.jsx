@@ -107,7 +107,7 @@ function App() {
 
             {examExpanded ?
                 
-                <Exam examText={examText} setExamExpanded={setExamExpanded} code={code} examTimeRemaining={examTimeRemaining} />
+                <Exam examText={examText} setExamExpanded={setExamExpanded} code={code} examTimeRemaining={examTimeRemaining} setExamBegan={setExamBegan} />
 
             :
                 <div style={columnContainerStyle}>
