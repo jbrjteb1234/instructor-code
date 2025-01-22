@@ -4,6 +4,7 @@ from openai import OpenAI
 import os
 from dotenv import load_dotenv
 import logging
+from grader import grade
 
 app = Flask(__name__)
 CORS(app)
@@ -88,8 +89,8 @@ def submitExam():
     payload = request.json
     submission = payload.get('submission','')
 
-    app.logger.info("User submission: "+submission)
-    #TODO: implement grading system
+    app.logger.info("User submission: "+"\n"+submission+"\n")
+    grade(submission)
 
     return '',204
 
