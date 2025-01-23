@@ -36,7 +36,7 @@ def prompt():
     code = payload.get('code','')
 
     userPrompt = f"User's question: {inputPrompt}\nUser's code: {code}"
-    systemPrompt = "Provide assistance to the user, who is a complete beginner. Produce NO python code, use PURE english to assist them but never typing out the correct code. In ONE paragraph Address a maximum of TWO issues."
+    systemPrompt = "Provide Python assistance to the user, who is a complete beginner. Produce NO python code, use PURE english to assist them but never typing out the correct code. In ONE paragraph."
 
     return complete(userPrompt, systemPrompt), 200
 
@@ -48,7 +48,7 @@ def error():
     code = payload.get('code','')
 
     userPrompt = f"User's error after running: {error}\nUser's code: {code}"
-    systemPrompt = "Provide assistance to the user, who is a complete beginner and just encountered an error after executing their python code. Produce NO python code, use PURE english to assist them but never typing out the correct code. In ONE paragraph Address a maximum of TWO issues."
+    systemPrompt = "Provide Python assistance to the user, who is a complete beginner and just encountered an error after executing their python code. Produce NO python code, use PURE english to assist them but never typing out the correct code. In ONE paragraph."
 
     return complete(userPrompt, systemPrompt), 200
 
