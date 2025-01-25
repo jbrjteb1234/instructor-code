@@ -112,11 +112,11 @@ function App() {
             :
                 <div style={columnContainerStyle}>
                     
-                    <div style={{flex: 1}}>
+                    <div style={{flex: 1, height: '50%'}}>
                         <NLTranslator code={code} />
                     </div>
                     
-                    <div style={{flex: 1}}>
+                    <div style={{flex: 1, height: '50%'}}>
                         <CodeOutput code={code} examEnabled={examEnabled} examBegan={examBegan} beginExam={beginExam} setExamExpanded={setExamExpanded} pyodide={pyodide}/>
                     </div>
                 
