@@ -26,7 +26,7 @@ function Exam( {examText, setExamExpanded, setExamBegan, code, examTimeRemaining
         backgroundColor: '#141414',
         color: '#d8d8d8',          
         fontFamily: 'monospace',  
-        fontSize: '2rem',      
+        fontSize: '20px',      
         textAlign: 'center', 
         whiteSpace: 'pre-wrap',    
         resize: 'none',
@@ -76,7 +76,7 @@ function Exam( {examText, setExamExpanded, setExamBegan, code, examTimeRemaining
                 style={examBriefStyle}
             />
 
-            <div style={{display: 'flex', flex: 1, flexGrow: 0, flexShrink: 0}}>
+            <div style={{display: 'flex', flex: 1, flexGrow: 0, flexShrink: 0, height: '5%'}}>
 
                 <textarea
                     readOnly
