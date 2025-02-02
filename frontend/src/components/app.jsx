@@ -92,7 +92,7 @@ function App() {
     const containerStyle = {
         height: '100vh', 
         display: 'flex',
-        backgroundImage: 'linear-gradient(to bottom, rgb(40,0,150), rgb(10, 0, 95))',
+        backgroundImage: 'linear-gradient(to bottom, rgb(0, 30, 120), rgb(0,40,60))',
     };
 
     const columnContainerStyle = {
