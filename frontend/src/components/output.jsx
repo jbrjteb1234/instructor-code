@@ -63,7 +63,9 @@ function CodeOutput( {code, examEnabled, examBegan, setExamExpanded, beginExam, 
                     fontSize: '14px',          
                     overflowY: 'scroll',       
                     whiteSpace: 'pre-wrap',    
-                    resize: 'none'              
+                    resize: 'none',
+                    userSelect: 'none',
+                    pointerEvents: 'none',
                 }}
                 value={output}
                 readOnly
