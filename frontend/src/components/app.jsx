@@ -92,38 +92,44 @@ function App() {
     const containerStyle = {
         height: '100vh', 
         display: 'flex',
+        backgroundImage: 'linear-gradient(to bottom, rgb(40,0,150), rgb(10, 0, 95))',
     };
 
     const columnContainerStyle = {
-        height: '100%',
-        width: '100%',
+        width: '50%',
+        margin: '10px',
         display: 'flex',
         flex: 1, 
         flexDirection: 'column',
     };
+
+    const componentBorder = '2px solid rgb(40,40,40)';
+    const componentMargin = '10px';
 
     return (
         <div style={containerStyle}>
 
             {examExpanded ?
                 
-                <Exam examText={examText} setExamExpanded={setExamExpanded} code={code} examTimeRemaining={examTimeRemaining} setExamBegan={setExamBegan} />
+                <div style={{margin: componentMargin, flex: 1, width: '50%', border: componentBorder}}>
+                    <Exam examText={examText} setExamExpanded={setExamExpanded} code={code} examTimeRemaining={examTimeRemaining} setExamBegan={setExamBegan} />
+                </div>
 
             :
                 <div style={columnContainerStyle}>
                     
-                    <div style={{flex: 1, height: '50%'}}>
+                    <div style={{flex: 1, height: '50%', marginBottom: componentMargin, border: componentBorder}}>
                         <NLTranslator code={code} />
                     </div>
                     
-                    <div style={{flex: 1, height: '50%'}}>
+                    <div style={{flex: 1, height: '50%', marginTop: componentMargin, border: componentBorder}}>
                         <CodeOutput code={code} examEnabled={examEnabled} examBegan={examBegan} beginExam={beginExam} setExamExpanded={setExamExpanded} pyodide={pyodide}/>
                     </div>
                 
                 </div>
             }
 
-            <div style={{flex: 1}}>
+            <div style={{flex: 1, margin: componentMargin, width: '50%', border: componentBorder}}>
                 <PythonEditor code={code} setCode={setCode} />
             </div>
             
