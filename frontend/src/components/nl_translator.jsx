@@ -23,6 +23,8 @@ function NLTranslator( {code} ) {
         fontFamily: 'Arial, sans-serif', 
         overflowY: 'scroll',
         backgroundColor: 'rgb(255,255,255)',
+        userSelect: 'none',
+        pointerEvents: 'none',
     };
 
     const translatorInputStyle = {
@@ -32,8 +34,6 @@ function NLTranslator( {code} ) {
         paddingRight: '6px', 
         paddingBottom: '5px',
         fontFamily: 'Arial, sans-serif',
-        userSelect: 'none',
-        pointerEvents: 'none',
     }
 
     function handleSetNLInput(e){
