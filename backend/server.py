@@ -13,6 +13,9 @@ app.logger.setLevel(logging.INFO)
 load_dotenv()
 client = OpenAI()
 
+examFileName = "exam.txt"
+submissionsFileName = "submissions.txt"
+
 def complete(userPrompt, systemPrompt):
     completion = client.chat.completions.create(
         messages=[
@@ -70,8 +73,11 @@ def beginExam():
         app.logger.error("Invalid exam time, must be integer. Defaulting to 30 minutes")
         examTime = 30*60
 
+    if not os.path.exists(examFileName):
+        return jsonify({"error": "File not found", "exam": "Exam not initialised."}),404
+
     try:
-        with open('exam.txt', 'r') as file:
+        with open(examFileName, 'r') as file:
             exam = file.read()
             app.logger.info("Successfully read exam file")
     except FileNotFoundError:
