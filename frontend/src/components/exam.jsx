@@ -46,6 +46,7 @@ function Exam( {examText, setExamExpanded, setExamBegan, code, examTimeRemaining
                     headers: {
                         'Content-Type': 'application/json', 
                     },
+                    withCredentials: true
                 }
 
             );

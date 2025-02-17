@@ -55,12 +55,17 @@ function NLTranslator( {code} ) {
                     headers: {
                         'Content-Type': 'application/json', 
                     },
+                    withCredentials: true
                 }
 
             );
 
             setTranslatorOutput(response.data || "No response");
         }catch(e){
+            if(response.status==403){
+                setTranslatorOutput("LLM Assistance unavailable.");
+                return;
+            }
             setTranslatorOutput('Error');
         }
     }
