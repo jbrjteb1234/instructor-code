@@ -38,14 +38,21 @@ function App() {
     async function beginExam(){
         if(!examBegan){
 
-            let response = await fetch('http://localhost:5000/begin-exam');
-            let payload = await response.json();
+            const response = await axios.get(
+                'http://localhost:5000/begin-exam',
+                {
+                    headers: {
+                        'Content-Type': 'application/json', 
+                    },
+                    withCredentials: true
+                }
+            );
 
-            if(response.ok){
+            if(response.status === 200){
                 setExamBegan(true);
                 setExamExpanded(true);    
-                setExamTimeRemaining(payload.examTime);
-                setExamText(payload.exam);
+                setExamTimeRemaining(response.data.examTime);
+                setExamText(response.data.exam);
             }else{
                 console.log(`Error communicating with begin exam endpoint.\nResponse code: ${response.status},\nResponse text: ${response.statusText}`)
             }
