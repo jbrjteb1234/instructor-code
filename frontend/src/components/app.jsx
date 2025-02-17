@@ -56,19 +56,26 @@ function App() {
     //checks the server is operational and if an exam is loaded
     useEffect(() => {
         async function statusCheck() {
-            try {
-                let response = await fetch('http://localhost:5000/status');
-                let payload = await response.json();
+            console.log(`Sending server status request`);
+            try{
+                const response = await axios.get(
+                    `http://localhost:5000/status`,
 
-                if(response.ok){
-                    console.log(`Established connection with server.`);
-                    setExamEnabled(payload.examLoaded);
-                }else{
-                    console.log(`Error establishing connection with server.\nResponse code: ${response.status},\nResponse text: ${response.statusText}`);
-                }
+                    {},
+
+                    {
+                        headers: {
+                            'Content-Type': 'application/json', 
+                        },
+                        withCredentials: true
+                    }
+
+                );
+                setExamEnabled(response.data.examLoaded);
+
             }catch(e){
                 console.error(`Unexpected error: ${e}`);
-            }    
+            }
         }
 
         statusCheck();
