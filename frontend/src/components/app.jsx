@@ -61,8 +61,6 @@ function App() {
                 const response = await axios.get(
                     `http://localhost:5000/status`,
 
-                    {},
-
                     {
                         headers: {
                             'Content-Type': 'application/json', 
