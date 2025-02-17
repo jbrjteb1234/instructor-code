@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, session
 from flask_cors import CORS
 from openai import OpenAI
 import os
@@ -7,8 +7,13 @@ from datetime import date
 import logging
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, supports_credentials=True)
 app.logger.setLevel(logging.INFO) 
+
+app.secret_key = os.getenv("SESSION_KEY", "BLANK_KEY")
+
+app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
+app.config['SESSION_COOKIE_SECURE'] = False
 
 load_dotenv()
 client = OpenAI()
@@ -17,7 +22,11 @@ examFileName = "exam.txt"
 submissionsFileName = "submissions.txt"
 
 def complete(userPrompt, systemPrompt):
-    completion = client.chat.completions.create(
+
+    if not session.get("assistance_enabled"):
+        return None
+
+    return client.chat.completions.create(
         messages=[
             {"role": "system", "content": systemPrompt},
             {"role": "user", "content": userPrompt}
@@ -25,11 +34,8 @@ def complete(userPrompt, systemPrompt):
         model="gpt-4o-mini", 
         max_tokens=1024,
         temperature=0.7
-    )
+    ).choices[0].message.content
 
-    output = completion.choices[0].message.content
-
-    return output
 
 @app.route('/prompt-assistance', methods=['POST'])
 def prompt():
@@ -41,7 +47,9 @@ def prompt():
     userPrompt = f"User's question: {inputPrompt}\nUser's code: {code}"
     systemPrompt = "Provide Python assistance to the user, who is a complete beginner. Produce NO python code, use PURE english to assist them but never typing out the correct code. In ONE paragraph."
 
-    return complete(userPrompt, systemPrompt), 200
+    reply = complete(userPrompt, systemPrompt)
+
+    return (reply, 200) if reply else ('', 403)
 
 @app.route('/query-error', methods=['POST'])
 def error():
@@ -53,11 +61,17 @@ def error():
     userPrompt = f"User's error after running: {error}\nUser's code: {code}"
     systemPrompt = "Provide Python assistance to the user, who is a complete beginner and just encountered an error after executing their python code. Produce NO python code, use PURE english to assist them but never typing out the correct code. In ONE paragraph."
 
-    return complete(userPrompt, systemPrompt), 200
+    reply = complete(userPrompt, systemPrompt)
+
+    return (reply, 200) if reply else ('', 403)
 
 @app.route('/status', methods=['GET'])
 def status():
     exam = os.getenv('EXAM') == '1'
+
+    if "assistance_enabled" not in session:
+        session["assistance_enabled"] = True  
+        print(session["assistance_enabled"])
 
     return jsonify({
         "status": "ok",
@@ -66,6 +80,10 @@ def status():
 
 @app.route('/begin-exam', methods=['GET'])
 def beginExam():
+
+    session["assistance_enabled"] = (os.getenv('EXAM_ASSISTANCE_ENABLED')=='1')
+
+    print("Setting assistance to : ", session["assistance_enabled"])
     
     try:
         examTime = int(os.getenv('EXAM_TIME', '30'))*60
@@ -94,6 +112,8 @@ def beginExam():
 def submitExam():
     payload = request.json
     submission = payload.get('submission','')
+
+    session["assistance_enabled"] = True
 
     try:
         with open('submissions.txt', 'a') as file:
