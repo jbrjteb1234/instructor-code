@@ -69,7 +69,7 @@ def error():
 def status():
     exam = os.getenv('EXAM') == '1'
 
-    if "assistance_enabled" not in session:
+    if "assistance_enabled" not in session or not session.get("assistance_enabled"):
         session["assistance_enabled"] = True  
         print(session["assistance_enabled"])
 
