@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PythonEditor from './python_editor.jsx';
-import NLTranslator from './nl_translator.jsx';
+import NLTranslator from './assistance.jsx';
 import CodeOutput from './output.jsx';
 import Exam from './exam.jsx';
 
